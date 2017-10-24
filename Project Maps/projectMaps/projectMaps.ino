@@ -26,8 +26,8 @@ void sensorLoops();
 void frontLoop();
 void backLoop();
 
-const int trigPinFront = 41;
-const int echoPinFront = 43;
+const int trigPinFront = 31;
+const int echoPinFront = 33;
 const int trigPinBack = 41;
 const int echoPinBack = 43;
 int w, h;
@@ -54,8 +54,8 @@ void loop(void)
 
 void sensorLoops()
 {
-    frontLoop();
-    //backLoop();
+    //frontLoop();
+    backLoop();
 }
 
 void frontLoop()
