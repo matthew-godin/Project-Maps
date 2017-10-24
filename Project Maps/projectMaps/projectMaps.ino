@@ -22,38 +22,78 @@ a fixed point without gps coordinates yet.
 #define WHITE   0xFFFF
 #define RANDOM_COLOR 0xFED4
 
-const int trigPin = 31;
-const int echoPin = 33;
-long duration;
-int distance;
+void sensorLoops();
+void frontLoop();
+void backLoop();
+
+const int trigPinFront = 41;
+const int echoPinFront = 43;
+const int trigPinBack = 41;
+const int echoPinBack = 43;
+int w, h;
 MCUFRIEND_kbv tft;
 
 void setup(void) 
 {
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
+  pinMode(trigPinFront, OUTPUT);
+  pinMode(echoPinFront, INPUT);
   Serial.begin(9600);
   tft.reset();
   uint16_t identifier = tft.readID();
   tft.begin(identifier);
+  w = tft.width(), h = tft.height();
   tft.fillScreen(BLACK);
 }
 
 void loop(void) 
 {
-    unsigned long start, t;
-  
-    digitalWrite(trigPin, LOW);
-    delayMicroseconds(2);
-    digitalWrite(trigPin, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(trigPin, LOW);
-    duration = pulseIn(echoPin, HIGH);
-    distance= duration * 0.034 / 2;
-    tft.setTextSize(5);
-    tft.fillScreen(BLACK);
-    tft.print("DISTANCE: ");
-    tft.println(distance);
+    sensorLoops();
     tft.setCursor(0, 0);
     delay(1000);
+}
+
+void sensorLoops()
+{
+    frontLoop();
+    //backLoop();
+}
+
+void frontLoop()
+{
+    int distance;
+  
+    digitalWrite(trigPinFront, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPinFront, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPinFront, LOW);
+    distance = pulseIn(echoPinFront, HIGH) * 0.034 / 2;
+    if (distance <= 300)
+    {
+      distance = 160 - distance * 0.8;
+      tft.drawLine(distance, 242, distance, 238, RED);
+    }
+}
+
+void backLoop()
+{
+    int distance;
+  
+    digitalWrite(trigPinBack, LOW);
+    delayMicroseconds(2);
+    digitalWrite(trigPinBack, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPinBack, LOW);
+    distance = pulseIn(echoPinBack, HIGH) * 0.034 / 2;
+    if (distance <= 300)
+    {
+      tft.setTextSize(5);
+      tft.println(distance);
+      distance = 160 + distance * 0.8;
+      tft.println(distance);
+      delay(3000);
+      tft.fillScreen(BLACK);
+      
+      //tft.drawLine(distance, 242, distance, 238, RED);
+    }
 }
