@@ -44,7 +44,16 @@ void setup(void)
   uint16_t identifier = tft.readID();
   tft.begin(identifier);
   w = tft.width(), h = tft.height();
+  tft.fillScreen(BLUE);
+  tft.setTextSize(2);
+  tft.setRotation(1);
+  tft.setTextColor(WHITE);
+  tft.print("\n\n\n\n\n   Welcome to Project Maps First Demo!");
+  tft.drawRect(tft.width() / 2 - 100 + 50, tft.height() / 2 - 50 + 30, 100, 100, WHITE);
+  tft.drawRect(tft.width() / 2 - 100 + 50 + 25, tft.height() / 2 - 50 + 55, 100, 100, WHITE);
+  delay(3000);
   tft.fillScreen(BLACK);
+  tft.setRotation(0);
 }
 
 void loop(void) 
