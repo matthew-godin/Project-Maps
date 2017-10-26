@@ -35,9 +35,11 @@ MCUFRIEND_kbv tft;
 
 void setup(void) 
 {
+  Serial.begin(9600);
   pinMode(trigPinFront, OUTPUT);
   pinMode(echoPinFront, INPUT);
-  Serial.begin(9600);
+  pinMode(trigPinBack, OUTPUT);
+  pinMode(echoPinBack, INPUT);
   tft.reset();
   uint16_t identifier = tft.readID();
   tft.begin(identifier);
@@ -54,7 +56,7 @@ void loop(void)
 
 void sensorLoops()
 {
-    //frontLoop();
+    frontLoop();
     backLoop();
 }
 
@@ -72,6 +74,7 @@ void frontLoop()
     {
       distance = 160 - distance * 0.8;
       tft.drawLine(distance, 242, distance, 238, RED);
+      delay(2000);
     }
 }
 
@@ -87,13 +90,8 @@ void backLoop()
     distance = pulseIn(echoPinBack, HIGH) * 0.034 / 2;
     if (distance <= 300)
     {
-      tft.setTextSize(5);
-      tft.println(distance);
       distance = 160 + distance * 0.8;
-      tft.println(distance);
-      delay(3000);
-      tft.fillScreen(BLACK);
-      
-      //tft.drawLine(distance, 242, distance, 238, RED);
+      tft.drawLine(distance, 242, distance, 238, RED);
+      delay(2000);
     }
 }
