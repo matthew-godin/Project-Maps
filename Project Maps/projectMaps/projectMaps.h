@@ -28,6 +28,12 @@
 #define TRIG_PIN_BACK 41
 #define ECHO_PIN_BACK 43
 
+typedef struct Position
+{
+  double x;
+  double y;
+} Position;
+
 void sensorSetup();
 void screenSetup();
 void gpsSetup();
@@ -53,5 +59,6 @@ void ifGpsEcho(char c);
 void ifGpsReceivednewNMEA();
 void printGpsNonFixInformation();
 void printGpsFixInformation();
+void firstGpsFix();
 
 #endif

@@ -63,6 +63,7 @@ void checkIfGpsMillisMinusTimerIsGreaterThan2000()
     printGpsNonFixInformation();
     if (GPS.fix)
     {
+      firstGpsFix();
       printGpsFixInformation();
     }
   }
@@ -90,14 +91,31 @@ void printGpsNonFixInformation()
   tft.println((int)GPS.fixquality);
 }
 
+bool firstFix = true;
+Position GpsPosition;
+
+void firstGpsFix()
+{
+  if (firstFix)
+  {
+    firstFix = false;
+    GpsPosition.x = GPS.latitude / 100.0;
+    GpsPosition.y = GPS.longitude / 100.0;
+  }
+}
+
 void printGpsFixInformation()
 {
   tft.print("Location: ");
-  tft.print(GPS.latitude, 4);
+  tft.print(GPS.latitude / 100.0, 4);
   tft.print(GPS.lat);
   tft.print(", ");
-  tft.print(GPS.longitude, 4);
+  tft.print(GPS.longitude / 100.0, 4);
   tft.println(GPS.lon);
+  tft.print("X(m): ");
+  tft.println((GPS.latitude / 100.0 - GpsPosition.x) * 111000);
+  tft.print("Y(m): ");
+  tft.println((GPS.longitude / 100.0 - GpsPosition.y) * 111000);
   tft.print("Speed (knots): ");
   tft.println(GPS.speed);
   tft.print("Angle: ");
