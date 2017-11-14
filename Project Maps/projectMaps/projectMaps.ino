@@ -18,7 +18,9 @@ Adafruit_GPS GPS(&Serial1);
 boolean usingInterrupt = false;
 void useInterrupt(boolean);
 uint32_t timer = millis();
+TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 int w, h;
+bool test = false;
 
 void setup()
 {
@@ -36,5 +38,6 @@ void loop()
   //gpsLoops();
   sensorLoops();
   buttonDrawLoops();
+  //buttonTouchLoops();
   loopEnd();
 }

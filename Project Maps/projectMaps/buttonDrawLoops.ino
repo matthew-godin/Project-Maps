@@ -10,7 +10,9 @@ void buttonDrawLoops()
   tft.drawRect(w / 2 - 50, h - 60, 100, 50, WHITE);
   tft.drawRect(w / 2 - 50, 10, 100, 50, WHITE);
   tft.drawRect(w - 55, 65, 40, 40, WHITE);
+  if (!test)
   tft.drawRect(w - 55, 15, 40, 40, WHITE);
+  else tft.drawRect(w - 55, 15, 40, 40, BLUE);
   tft.drawRect(15, 15, 40, 40, WHITE);
   tft.drawLine(w - 25, 35, w - 45, 35, WHITE);
   tft.drawLine(w - 35, 45, w - 35, 25, WHITE);

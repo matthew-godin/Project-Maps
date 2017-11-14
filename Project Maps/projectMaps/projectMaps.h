@@ -8,6 +8,9 @@
 #include <Adafruit_TFTLCD.h>
 #include <MCUFRIEND_kbv.h>
 
+#include <stdint.h>
+#include <TouchScreen.h>
+
 #define LCD_CS A3
 #define LCD_CD A2
 #define LCD_WR A1
@@ -27,6 +30,10 @@
 #define ECHO_PIN_FRONT 33
 #define TRIG_PIN_BACK 41
 #define ECHO_PIN_BACK 43
+#define YP A2
+#define XM A3
+#define YM 8
+#define XP 9
 
 typedef struct Position
 {
@@ -62,5 +69,7 @@ void printGpsFixInformation();
 void firstGpsFix();
 void buttonDrawLoops();
 void setInitialBeforePopUpFontAndColor();
+void buttonTouchLoops();
+void differentButtons(TSPoint &p);
 
 #endif
