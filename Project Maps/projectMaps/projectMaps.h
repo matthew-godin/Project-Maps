@@ -60,5 +60,7 @@ void ifGpsReceivednewNMEA();
 void printGpsNonFixInformation();
 void printGpsFixInformation();
 void firstGpsFix();
+void buttonDrawLoops();
+void setInitialBeforePopUpFontAndColor();
 
 #endif

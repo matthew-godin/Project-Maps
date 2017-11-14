@@ -9,6 +9,13 @@ void gpsSetup()
   mySerial.println(PMTK_Q_RELEASE);
 }
 
+void setInitialBeforePopUpFontAndColor()
+{
+  tft.setTextSize(2);
+  tft.setRotation(1);
+  tft.setTextColor(BLACK);
+}
+
 void setInitialFontAndColor()
 {
   tft.setTextColor(WHITE);
@@ -19,9 +26,6 @@ void setInitialFontAndColor()
 void startPopUpScreen()
 {
   tft.fillScreen(RED);
-  tft.setTextSize(2);
-  tft.setRotation(1);
-  tft.setTextColor(BLACK);
   tft.print("\n\n\n\n\n   Welcome to Project Maps Second Demo!");
   tft.drawRect(tft.width() / 2 - 100 + 50, tft.height() / 2 - 50 + 30, 100, 100, WHITE);
   tft.drawRect(tft.width() / 2 - 100 + 50 + 25, tft.height() / 2 - 50 + 55, 100, 100, WHITE);

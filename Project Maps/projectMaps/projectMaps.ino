@@ -24,7 +24,8 @@ void setup()
 {
   sensorSetup();
   screenSetup();
-  startPopUpScreen();
+  setInitialBeforePopUpFontAndColor();
+  //startPopUpScreen();
   setInitialFontAndColor();
   gpsSetup();
 }
@@ -32,7 +33,8 @@ void setup()
 void loop()
 {
   loopInit();
-  gpsLoops();
+  //gpsLoops();
   sensorLoops();
+  buttonDrawLoops();
   loopEnd();
 }
