@@ -43,6 +43,7 @@ void screenSetup()
 void touchScreenSetup()
 {
   pinMode(13, OUTPUT);
+  initializeButtons();
 }
 
 void sensorSetup()

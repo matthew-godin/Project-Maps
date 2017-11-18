@@ -19,6 +19,8 @@ boolean usingInterrupt = false;
 void useInterrupt(boolean);
 uint32_t timer = millis();
 TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
+bool buttonPressed;
+ButtonState buttonState;
 int w, h;
 
 void setup()
@@ -30,14 +32,15 @@ void setup()
   //startPopUpScreen();
   setInitialFontAndColor();
   gpsSetup();
+  buttonDrawLoops();
 }
 
 void loop()
 {
   loopInit();
   //gpsLoops();
-  sensorLoops();
-  buttonDrawLoops();
+  //sensorLoops();
+  //buttonDrawLoops();
   buttonTouchLoops();
   loopEnd();
 }

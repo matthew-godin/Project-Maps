@@ -50,6 +50,11 @@ typedef struct Position
   double y;
 } Position;
 
+typedef enum ButtonState
+{
+  TOP, BOTTOM, RIGHT, LEFT, PLUS, MINUS, CENTER
+} ButtonState;
+
 void sensorSetup();
 void screenSetup();
 void gpsSetup();
@@ -79,10 +84,26 @@ void firstGpsFix();
 void buttonDrawLoops();
 void setInitialBeforePopUpFontAndColor();
 void buttonTouchLoops();
-TSPoint initializeTouchLoop();
-void checkIfTouching(TSPoint p);
+//TSPoint initializeTouchLoop();
+//void checkIfTouching(TSPoint p);
 void ifTouching(TSPoint p);
 void touchScreenSetup();
 void buttonMap(TSPoint p);
+void initializeButtons();
+void checkWhichButtonHasBeenReleased();
+void topButtonPressed();
+void bottomButtonPressed();
+void rightButtonPressed();
+void leftButtonPressed();
+void plusButtonPressed();
+void minusButtonPressed();
+void centerButtonPressed();
+void topButtonReleased();
+void bottomButtonReleased();
+void rightButtonReleased();
+void leftButtonReleased();
+void plusButtonReleased();
+void minusButtonReleased();
+void centerButtonReleased();
 
 #endif
