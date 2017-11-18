@@ -8,9 +8,12 @@
 #include <Adafruit_TFTLCD.h>
 #include <MCUFRIEND_kbv.h>
 
-#include <stdint.h>
 #include <TouchScreen.h>
 
+#if defined(__SAM3X8E__)
+    #undef __FlashStringHelper::F(string_literal)
+    #define F(string_literal) string_literal
+#endif
 #define LCD_CS A3
 #define LCD_CD A2
 #define LCD_WR A1
@@ -34,6 +37,12 @@
 #define XM A3
 #define YM 8
 #define XP 9
+#define TS_MINX 130
+#define TS_MAXX 905
+#define TS_MINY 75
+#define TS_MAXY 930
+#define MINPRESSURE 10
+#define MAXPRESSURE 1000
 
 typedef struct Position
 {
@@ -70,6 +79,10 @@ void firstGpsFix();
 void buttonDrawLoops();
 void setInitialBeforePopUpFontAndColor();
 void buttonTouchLoops();
-void differentButtons(TSPoint &p);
+TSPoint initializeTouchLoop();
+void checkIfTouching(TSPoint p);
+void ifTouching(TSPoint p);
+void touchScreenSetup();
+void buttonMap(TSPoint p);
 
 #endif

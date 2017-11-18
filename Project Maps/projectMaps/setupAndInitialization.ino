@@ -27,8 +27,8 @@ void startPopUpScreen()
 {
   tft.fillScreen(RED);
   tft.print("\n\n\n\n\n   Welcome to Project Maps Second Demo!");
-  tft.drawRect(tft.width() / 2 - 100 + 50, tft.height() / 2 - 50 + 30, 100, 100, WHITE);
-  tft.drawRect(tft.width() / 2 - 100 + 50 + 25, tft.height() / 2 - 50 + 55, 100, 100, WHITE);
+  tft.drawRect(w / 2 - 100 + 50, h / 2 - 50 + 30, 100, 100, WHITE);
+  tft.drawRect(w / 2 - 100 + 50 + 25, h / 2 - 50 + 55, 100, 100, WHITE);
   delay(3000);
 }
 
@@ -38,6 +38,11 @@ void screenSetup()
   uint16_t identifier = tft.readID();
   tft.begin(identifier);
   w = tft.width(), h = tft.height();
+}
+
+void touchScreenSetup()
+{
+  pinMode(13, OUTPUT);
 }
 
 void sensorSetup()
