@@ -10,6 +10,9 @@
 
 #include <TouchScreen.h>
 
+#include <SPI.h>
+#include <SD.h>
+
 #if defined(__SAM3X8E__)
     #undef __FlashStringHelper::F(string_literal)
     #define F(string_literal) string_literal
@@ -116,5 +119,7 @@ void leftButtonReleased();
 void plusButtonReleased();
 void minusButtonReleased();
 void centerButtonReleased();
+void sdCardSetup();
+void printPixels();
 
 #endif

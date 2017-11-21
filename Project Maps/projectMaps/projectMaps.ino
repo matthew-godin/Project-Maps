@@ -23,6 +23,12 @@ bool buttonPressed;
 ButtonState buttonState;
 int w, h;
 Position cPos;
+Sd2Card card;
+SdVolume volume;
+SdFile root;
+File sdFile;
+int b = sizeof(bool);
+bool t = true;
 
 void setup()
 {
@@ -32,14 +38,15 @@ void setup()
   setInitialBeforePopUpFontAndColor();
   //startPopUpScreen();
   setInitialFontAndColor();
-  gpsSetup();
+  //gpsSetup();
+  sdCardSetup();
   buttonDrawLoops();
 }
 
 void loop()
 {
   loopInit();
-  gpsLoops();
+  //gpsLoops();
   sensorLoops();
   buttonDrawLoops();
   buttonTouchLoops();

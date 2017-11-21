@@ -61,3 +61,53 @@ void sensorSetup()
   pinMode(ECHO_PIN_LEFT, INPUT);
 }
 
+void sdCardSetup()
+{
+  pinMode(SS, OUTPUT);
+  while (!card.init(SPI_HALF_SPEED, 10, 11, 12, 13)) 
+  {
+    tft.print("Initializing SD card . . .");
+    tft.fillScreen(BLACK);
+  }  
+  tft.print("SD card initialized!");
+  delay(500);
+  tft.fillScreen(BLACK);
+  sdFile = SD.open("datalog.dat", FILE_WRITE);
+  bool a;
+  for (int i = 0; i < 800; ++i)
+  {
+    for (int j = 0; j <  800; ++j)
+    {
+      a = false;
+      //sdFile.write((char*)&a, sizeof(a));
+      sdFile.write((uint8_t *)&a, sizeof(a));
+    }
+    tft.print(i);
+    if (i % 150 == 0)
+    {
+      tft.fillScreen(BLACK);
+      tft.setCursor(0, 0);
+    }
+  }
+  tft.print("Array created !");
+  delay(3000);
+  tft.fillScreen(BLACK);
+  sdFile.close();
+  tft.setCursor(0, 0);
+  sdFile = SD.open("datalog.dat", FILE_READ);
+  for (int i = 0; i < 800; ++i)
+  {
+    for (int j = 0; j <  800; ++j)
+    {
+      sdFile.read((uint8_t *)&a, sizeof(a));
+    }
+    tft.print(a);
+      if (i % 300 == 0)
+      {
+        tft.fillScreen(BLACK);
+        tft.setCursor(0, 0);
+      }
+  }
+  sdFile.close();
+}
+
