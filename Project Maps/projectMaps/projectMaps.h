@@ -29,10 +29,18 @@
 #define WHITE   0xFFFF
 #define RANDOM_COLOR 0xFED4
 #define GPSECHO  true
-#define TRIG_PIN_FRONT 31
-#define ECHO_PIN_FRONT 33
-#define TRIG_PIN_BACK 41
-#define ECHO_PIN_BACK 43
+#define TRIG_PIN_FRONT 23
+#define ECHO_PIN_FRONT 25
+#define TRIG_PIN_RIGHT 27
+#define ECHO_PIN_RIGHT 29
+#define TRIG_PIN_RIGHT_BACK 31
+#define ECHO_PIN_RIGHT_BACK 33
+#define TRIG_PIN_LEFT_BACK 35
+#define ECHO_PIN_LEFT_BACK 37
+#define TRIG_PIN_LEFT 39
+#define ECHO_PIN_LEFT 41
+#define SQRT_2_OVER_2 0.707106781
+
 #define YP A2
 #define XM A3
 #define YM 8
@@ -62,7 +70,10 @@ void startPopUpScreen();
 void setInitialFontAndColor();
 void sensorLoops();
 void frontLoop();
-void backLoop();
+void rightLoop();
+void leftLoop();
+void leftBackLoop();
+void rightBackLoop();
 SIGNAL(TIMER0_COMPA_vect);
 void useInterrupt(boolean v);
 void checkGpsEcho(char c);

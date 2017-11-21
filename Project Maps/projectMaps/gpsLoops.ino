@@ -71,7 +71,7 @@ void checkIfGpsMillisMinusTimerIsGreaterThan2000()
 
 void printGpsNonFixInformation()
 {
-  tft.print("\nTime: ");
+  /*tft.print("\nTime: ");
   tft.print(GPS.hour, DEC);
   tft.print(':');
   tft.print(GPS.minute, DEC);
@@ -88,7 +88,7 @@ void printGpsNonFixInformation()
   tft.print("Fix: ");
   tft.print((int)GPS.fix);
   tft.print(" quality: ");
-  tft.println((int)GPS.fixquality);
+  tft.println((int)GPS.fixquality);*/
 }
 
 bool firstFix = true;
@@ -98,6 +98,8 @@ void firstGpsFix()
 {
   if (firstFix)
   {
+    cPos.x = 0;
+    cPos.y = 0;
     firstFix = false;
     GpsPosition.x = GPS.latitude / 100.0;
     GpsPosition.y = GPS.longitude / 100.0;
@@ -106,7 +108,7 @@ void firstGpsFix()
 
 void printGpsFixInformation()
 {
-  tft.print("Location: ");
+  /*tft.print("Location: ");
   tft.print(GPS.latitude / 100.0, 4);
   tft.print(GPS.lat);
   tft.print(", ");
@@ -123,6 +125,8 @@ void printGpsFixInformation()
   tft.print("Altitude: ");
   tft.println(GPS.altitude);
   tft.print("Satellites: ");
-  tft.println((int)GPS.satellites);
+  tft.println((int)GPS.satellites);*/
+  cPos.x = (GPS.latitude / 100.0 - GpsPosition.x) * 111000;
+  cPos.y = (GPS.longitude / 100.0 - GpsPosition.y) * 111000;
 }
 

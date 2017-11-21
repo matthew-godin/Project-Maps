@@ -22,6 +22,7 @@ TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 bool buttonPressed;
 ButtonState buttonState;
 int w, h;
+Position cPos;
 
 void setup()
 {
@@ -38,9 +39,9 @@ void setup()
 void loop()
 {
   loopInit();
-  //gpsLoops();
-  //sensorLoops();
-  //buttonDrawLoops();
+  gpsLoops();
+  sensorLoops();
+  buttonDrawLoops();
   buttonTouchLoops();
   loopEnd();
 }

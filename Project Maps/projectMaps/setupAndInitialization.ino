@@ -51,6 +51,13 @@ void sensorSetup()
   Serial.begin(9600);
   pinMode(TRIG_PIN_FRONT, OUTPUT);
   pinMode(ECHO_PIN_FRONT, INPUT);
-  pinMode(TRIG_PIN_BACK, OUTPUT);
-  pinMode(ECHO_PIN_BACK, INPUT);
+  pinMode(TRIG_PIN_RIGHT, OUTPUT);
+  pinMode(ECHO_PIN_RIGHT, INPUT);
+  pinMode(TRIG_PIN_RIGHT_BACK, OUTPUT);
+  pinMode(ECHO_PIN_RIGHT_BACK, INPUT);
+  pinMode(TRIG_PIN_LEFT_BACK, OUTPUT);
+  pinMode(ECHO_PIN_LEFT_BACK, INPUT);
+  pinMode(TRIG_PIN_LEFT, OUTPUT);
+  pinMode(ECHO_PIN_LEFT, INPUT);
 }
+
