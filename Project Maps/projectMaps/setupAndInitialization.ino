@@ -73,13 +73,14 @@ void sdCardSetup()
   delay(500);
   tft.fillScreen(BLACK);
   sdFile = SD.open("datalog.dat", FILE_WRITE);
-  bool a = false;
+  uint8_t bob = 33;
+  uint8_t *a = &bob;
   for (int i = 0; i < 800; ++i)
   {
     for (int j = 0; j <  800; ++j)
     {
       //sdFile.write((char*)&a, sizeof(a));
-      sdFile.write((uint8_t *)&a, sizeof(a));
+      sdFile.write((const uint8_t *)&bob, sizeof(a));
     }
     tft.print(i);
     if (i % 150 == 0)
@@ -93,7 +94,14 @@ void sdCardSetup()
   tft.fillScreen(BLACK);
   sdFile.close();
   tft.setCursor(0, 0);
-  sdFile = SD.open("datalog.dat", FILE_READ);
+  /*tft.println("PRINT PIXELS IN SETUP");
+  delay(2000);
+  printPixels();
+  tft.fillScreen(BLACK);
+  tft.println("END OF PRINT PIXELS IN SETUP");
+  delay(2000);
+  tft.fillScreen(BLACK);*/
+  /*sdFile = SD.open("datalog.dat", FILE_READ);
   for (int i = 0; i < 800; ++i)
   {
     for (int j = 0; j <  800; ++j)
@@ -107,6 +115,6 @@ void sdCardSetup()
         tft.setCursor(0, 0);
       }
   }
-  sdFile.close();
+  sdFile.close();*/
 }
 

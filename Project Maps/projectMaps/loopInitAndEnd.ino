@@ -1,6 +1,6 @@
 void loopInit()
 {
-  //tft.fillScreen(BLACK);
+  tft.fillScreen(BLACK);
   tft.setCursor(0, 0);
 }
 

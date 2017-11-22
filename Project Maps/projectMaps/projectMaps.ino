@@ -36,17 +36,17 @@ void setup()
   screenSetup();
   touchScreenSetup();
   setInitialBeforePopUpFontAndColor();
-  //startPopUpScreen();
+  startPopUpScreen();
   setInitialFontAndColor();
-  //gpsSetup();
-  sdCardSetup();
+  gpsSetup();
+  //sdCardSetup();
   buttonDrawLoops();
 }
 
 void loop()
 {
   loopInit();
-  //gpsLoops();
+  gpsLoops();
   sensorLoops();
   buttonDrawLoops();
   buttonTouchLoops();
