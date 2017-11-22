@@ -73,12 +73,11 @@ void sdCardSetup()
   delay(500);
   tft.fillScreen(BLACK);
   sdFile = SD.open("datalog.dat", FILE_WRITE);
-  bool a;
+  bool a = false;
   for (int i = 0; i < 800; ++i)
   {
     for (int j = 0; j <  800; ++j)
     {
-      a = false;
       //sdFile.write((char*)&a, sizeof(a));
       sdFile.write((uint8_t *)&a, sizeof(a));
     }

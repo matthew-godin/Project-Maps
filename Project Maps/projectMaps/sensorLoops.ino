@@ -1,27 +1,5 @@
 void sensorLoops()
 {
-  bool a;
-  tft.print("START");
-  delay(3000);
-  tft.setCursor(0, 0);
-  sdFile = SD.open("datalog.dat", FILE_READ);
-  for (int i = 240; i < 800; ++i)
-  {
-    for (int j = 160; j <  800; ++j)
-    {
-      sdFile.read((const uint8_t *)&a, sizeof(a));
-    }
-    tft.print(a);
-      if (i % 300 == 0)
-      {
-        tft.fillScreen(BLACK);
-        tft.setCursor(0, 0);
-      }
-  }
-  sdFile.close();
-  tft.print("END");
-  delay(3000);
-    printPixels();
     frontLoop();
     /*rightLoop();
     rightBackLoop();
@@ -79,8 +57,7 @@ void printPixels()
   }
   sdFile.close();*/
   bool a;
-  tft.print("START");
-  delay(3000);
+  tft.println("START");
   tft.setCursor(0, 0);
   sdFile = SD.open("datalog.dat", FILE_READ);
   for (int i = 240; i < 800; ++i)
@@ -88,6 +65,12 @@ void printPixels()
     for (int j = 160; j <  800; ++j)
     {
       sdFile.read((const uint8_t *)&a, sizeof(a));
+      if (a)
+      {
+        tft.fillScreen(BLACK);
+        tft.println("SUCESSSSSSSSSS");
+        delay(3000);
+      }
     }
     tft.print(a);
       if (i % 300 == 0)
@@ -97,7 +80,7 @@ void printPixels()
       }
   }
   sdFile.close();
-  tft.print("END");
+  tft.println("END");
 }
 
 void rightLoop()
