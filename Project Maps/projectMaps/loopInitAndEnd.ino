@@ -7,6 +7,6 @@ void loopInit()
 void loopEnd()
 {
   tft.setCursor(0, 0);
-  delay(3000);
+  delay(1000);
 }
 

@@ -76,7 +76,7 @@ void frontLoop();
 void rightLoop();
 void leftLoop();
 void leftBackLoop();
-void rightBackLoop();
+void BackLoop();
 SIGNAL(TIMER0_COMPA_vect);
 void useInterrupt(boolean v);
 void checkGpsEcho(char c);

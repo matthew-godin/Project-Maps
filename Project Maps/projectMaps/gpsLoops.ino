@@ -103,6 +103,7 @@ void firstGpsFix()
     firstFix = false;
     GpsPosition.x = GPS.latitude / 100.0;
     GpsPosition.y = GPS.longitude / 100.0;
+    delay(180000);
   }
 }
 

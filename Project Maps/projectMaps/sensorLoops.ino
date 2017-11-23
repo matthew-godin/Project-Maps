@@ -2,8 +2,8 @@ void sensorLoops()
 {
     frontLoop();
     rightLoop();
-    rightBackLoop();
-    leftBackLoop();
+    BackLoop();
+//    leftBackLoop();
     leftLoop();
     //printPixels();
 }
@@ -12,8 +12,12 @@ const float scale = 0.08;
 const float sg = scale * 100;
 const int m240 = 240;
 const int m160 = 160;
-const int wL = 2;
+const int wL = 300;
 const int minW = 100;
+int count= 0;
+int count_right = 0;
+int count_left = 0;
+int count_back = 0;
 
 void frontLoop()
 {
@@ -29,7 +33,7 @@ void frontLoop()
     //tft.fillScreen(BLACK);
     //tft.setCursor(0, 0);
     //tft.print(distance);
-    if (distance <= 300 && distance >= minW)
+    if (distance <= 300 && distance >= minW && count==0)
     {
       /*d = distance * 0.8;
       l1 = b * ((400 - d) * 800 + 400);
@@ -42,6 +46,7 @@ void frontLoop()
       delay(3000);*/
       distance = 160 - distance * scale;
       tft.drawLine(distance  + cPos.y * sg, m240 + wL + cPos.x * sg, distance  + cPos.y * sg, m240 - wL + cPos.x * sg, RED);
+      count = 1;
       //delay(2000);
     }
 }
@@ -112,15 +117,19 @@ void rightLoop()
     delayMicroseconds(10);
     digitalWrite(TRIG_PIN_RIGHT, LOW);
     distance = pulseIn(ECHO_PIN_RIGHT, HIGH) * 0.034 / 2;
-    if (distance <= 300)
+    if (distance <= 300 && distance >= minW && count_right==0)
     {
-      distance = 240 - distance * scale;
-      tft.drawLine(m160 + wL, distance, m160 - wL, distance, RED);
+      distance = distance * scale;
+      tft.println(distance);
+      //tft.drawLine(distance  + cPos.y * sg, m240 + wL + cPos.x * sg, distance  + cPos.y * sg, m240 - wL + cPos.x * sg, RED);
+      tft.drawLine(m160 + wL + cPos.x * sg,m240 + cPos.y*sg - distance, m160 - wL + cPos.x * sg, m240 + cPos.y*sg - distance, RED);
+      //tft.drawLine(m160 + wL, distance, m160 - wL, distance, RED);
       //delay(2000);
+      count_right =1;
     }
 }
 
-void rightBackLoop()
+void BackLoop()
 {
     int distance;
   
@@ -130,31 +139,32 @@ void rightBackLoop()
     delayMicroseconds(10);
     digitalWrite(TRIG_PIN_RIGHT_BACK, LOW);
     distance = pulseIn(ECHO_PIN_RIGHT_BACK, HIGH) * 0.034 / 2;
-    if (distance <= 300  && distance >= minW)
+    if (distance <= 300  && distance >= minW&&count_back==0)
     {
-      distance = SQRT_2_OVER_2 * scale * distance;
-      tft.drawLine(m160 + distance - wL, 240 - distance - wL, m160 + distance + wL, m240 - distance + wL, RED);
+      distance = 160 + distance * scale;
+      tft.drawLine( distance  + cPos.y * sg, m240 + wL + cPos.x * sg, distance  + cPos.y * sg, m240 - wL + cPos.x * sg, RED);
       //delay(2000);
+      count_back =1;
     }
 }
 
-void leftBackLoop()
-{
-    int distance;
-  
-    digitalWrite(TRIG_PIN_LEFT_BACK, LOW);
-    delayMicroseconds(2);
-    digitalWrite(TRIG_PIN_LEFT_BACK, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(TRIG_PIN_LEFT_BACK, LOW);
-    distance = pulseIn(ECHO_PIN_LEFT_BACK, HIGH) * 0.034 / 2;
-    if (distance <= 300  && distance >= minW)
-    {
-      distance = SQRT_2_OVER_2 * scale * distance;
-      tft.drawLine(m160 + distance + wL, m240 + distance - wL, m160 + distance - wL, m240 + distance + wL, RED);
-      //delay(2000);
-    }
-}
+//void leftBackLoop()
+//{
+//    int distance;
+//  
+//    digitalWrite(TRIG_PIN_LEFT_BACK, LOW);
+//    delayMicroseconds(2);
+//    digitalWrite(TRIG_PIN_LEFT_BACK, HIGH);
+//    delayMicroseconds(10);
+//    digitalWrite(TRIG_PIN_LEFT_BACK, LOW);
+//    distance = pulseIn(ECHO_PIN_LEFT_BACK, HIGH) * 0.034 / 2;
+//    if (distance <= 300  && distance >= minW)
+//    {
+//      distance = SQRT_2_OVER_2 * scale * distance;
+//      tft.drawLine(m160 + distance + wL, m240 + distance - wL, m160 + distance - wL, m240 + distance + wL, RED);
+//      //delay(2000);
+//    }
+//}
 
 void leftLoop()
 {
@@ -166,10 +176,11 @@ void leftLoop()
     delayMicroseconds(10);
     digitalWrite(TRIG_PIN_LEFT, LOW);
     distance = pulseIn(ECHO_PIN_LEFT, HIGH) * 0.034 / 2;
-    if (distance <= 300  && distance >= minW)
+    if (distance <= 300  && distance >= minW && count_left == 0)
     {
-      distance = 240 + distance * scale;
-      tft.drawLine(m160 + wL, distance, m160 - wL, distance, RED);
+      distance = distance * scale;
+      tft.drawLine(m160 + wL + cPos.x * sg,m240 + cPos.y*sg + distance, m160 - wL + cPos.x * sg, m240 + cPos.y*sg + distance, RED);
       //delay(2000);
+      count_left = 1;
     }
 }
