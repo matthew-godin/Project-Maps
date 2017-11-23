@@ -45,7 +45,7 @@ void setup()
 
 void loop()
 {
-  loopInit();
+  //loopInit();
   gpsLoops();
   sensorLoops();
   buttonDrawLoops();
