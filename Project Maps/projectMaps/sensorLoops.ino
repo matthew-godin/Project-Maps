@@ -2,18 +2,17 @@ void sensorLoops()
 {
     frontLoop();
     rightLoop();
-    BackLoop();
-//    leftBackLoop();
+    backLoop();
     leftLoop();
-    //printPixels();
 }
 
-const float scale = 0.08;
-const float sg = scale * 100;
-const int m240 = 240;
-const int m160 = 160;
-const int wL = 300;
-const int minW = 100;
+const float scaleForCentimeters = 0.08;
+const float scaleForMeters = scaleForCentimeters * 100;
+const int halfScreenLength = 240;
+const int halfScreenHeight = 160;
+const int wallLength = 300;
+const int minDistance = 100;
+const int maxDistance = 300;
 int count= 0;
 int count_right = 0;
 int count_left = 0;
@@ -33,7 +32,7 @@ void frontLoop()
     //tft.fillScreen(BLACK);
     //tft.setCursor(0, 0);
     //tft.print(distance);
-    if (distance <= 300 && distance >= minW && count==0)
+    if (distance <= maxDistance && distance >= minDistance && count==0)
     {
       /*d = distance * 0.8;
       l1 = b * ((400 - d) * 800 + 400);
@@ -44,8 +43,8 @@ void frontLoop()
       distance = 160 - d;
       tft.fillScreen(RED);
       delay(3000);*/
-      distance = 160 - distance * scale;
-      tft.drawLine(distance  + cPos.y * sg, m240 + wL + cPos.x * sg, distance  + cPos.y * sg, m240 - wL + cPos.x * sg, RED);
+      distance = 160 - distance * scaleForCentimeters;
+      tft.drawLine(distance  + displacementGPS.y * scaleForMeters, halfScreenLength + wallLength + displacementGPS.x * scaleForMeters, distance  + displacementGPS.y * scaleForMeters, halfScreenLength - wallLength + displacementGPS.x * scaleForMeters, RED);
       count = 1;
       //delay(2000);
     }
@@ -117,19 +116,19 @@ void rightLoop()
     delayMicroseconds(10);
     digitalWrite(TRIG_PIN_RIGHT, LOW);
     distance = pulseIn(ECHO_PIN_RIGHT, HIGH) * 0.034 / 2;
-    if (distance <= 300 && distance >= minW && count_right==0)
+    if (distance <= maxDistance && distance >= minDistance && count_right==0)
     {
-      distance = distance * scale;
+      distance = distance * scaleForCentimeters;
       tft.println(distance);
-      //tft.drawLine(distance  + cPos.y * sg, m240 + wL + cPos.x * sg, distance  + cPos.y * sg, m240 - wL + cPos.x * sg, RED);
-      tft.drawLine(m160 + wL + cPos.x * sg,m240 + cPos.y*sg - distance, m160 - wL + cPos.x * sg, m240 + cPos.y*sg - distance, RED);
-      //tft.drawLine(m160 + wL, distance, m160 - wL, distance, RED);
+      //tft.drawLine(distance  + displacementGPS.y * scaleForMeters, halfScreenLength + wallLength + displacementGPS.x * scaleForMeters, distance  + displacementGPS.y * scaleForMeters, halfScreenLength - wallLength + displacementGPS.x * scaleForMeters, RED);
+      tft.drawLine(halfScreenHeight + wallLength + displacementGPS.x * scaleForMeters,halfScreenLength + displacementGPS.y*scaleForMeters - distance, halfScreenHeight - wallLength + displacementGPS.x * scaleForMeters, halfScreenLength + displacementGPS.y*scaleForMeters - distance, RED);
+      //tft.drawLine(halfScreenHeight + wallLength, distance, halfScreenHeight - wallLength, distance, RED);
       //delay(2000);
       count_right =1;
     }
 }
 
-void BackLoop()
+void backLoop()
 {
     int distance;
   
@@ -139,10 +138,10 @@ void BackLoop()
     delayMicroseconds(10);
     digitalWrite(TRIG_PIN_RIGHT_BACK, LOW);
     distance = pulseIn(ECHO_PIN_RIGHT_BACK, HIGH) * 0.034 / 2;
-    if (distance <= 300  && distance >= minW&&count_back==0)
+    if (distance <= maxDistance  && distance >= minDistance&&count_back==0)
     {
-      distance = 160 + distance * scale;
-      tft.drawLine( distance  + cPos.y * sg, m240 + wL + cPos.x * sg, distance  + cPos.y * sg, m240 - wL + cPos.x * sg, RED);
+      distance = 160 + distance * scaleForCentimeters;
+      tft.drawLine( distance  + displacementGPS.y * scaleForMeters, halfScreenLength + wallLength + displacementGPS.x * scaleForMeters, distance  + displacementGPS.y * scaleForMeters, halfScreenLength - wallLength + displacementGPS.x * scaleForMeters, RED);
       //delay(2000);
       count_back =1;
     }
@@ -158,10 +157,10 @@ void BackLoop()
 //    delayMicroseconds(10);
 //    digitalWrite(TRIG_PIN_LEFT_BACK, LOW);
 //    distance = pulseIn(ECHO_PIN_LEFT_BACK, HIGH) * 0.034 / 2;
-//    if (distance <= 300  && distance >= minW)
+//    if (distance <= maxDistance  && distance >= minDistance)
 //    {
-//      distance = SQRT_2_OVER_2 * scale * distance;
-//      tft.drawLine(m160 + distance + wL, m240 + distance - wL, m160 + distance - wL, m240 + distance + wL, RED);
+//      distance = SQRT_2_OVER_2 * scaleForCentimeters * distance;
+//      tft.drawLine(halfScreenHeight + distance + wallLength, halfScreenLength + distance - wallLength, halfScreenHeight + distance - wallLength, halfScreenLength + distance + wallLength, RED);
 //      //delay(2000);
 //    }
 //}
@@ -176,10 +175,10 @@ void leftLoop()
     delayMicroseconds(10);
     digitalWrite(TRIG_PIN_LEFT, LOW);
     distance = pulseIn(ECHO_PIN_LEFT, HIGH) * 0.034 / 2;
-    if (distance <= 300  && distance >= minW && count_left == 0)
+    if (distance <= maxDistance  && distance >= minDistance && count_left == 0)
     {
-      distance = distance * scale;
-      tft.drawLine(m160 + wL + cPos.x * sg,m240 + cPos.y*sg + distance, m160 - wL + cPos.x * sg, m240 + cPos.y*sg + distance, RED);
+      distance = distance * scaleForCentimeters;
+      tft.drawLine(halfScreenHeight + wallLength + displacementGPS.x * scaleForMeters,halfScreenLength + displacementGPS.y*scaleForMeters + distance, halfScreenHeight - wallLength + displacementGPS.x * scaleForMeters, halfScreenLength + displacementGPS.y*scaleForMeters + distance, RED);
       //delay(2000);
       count_left = 1;
     }

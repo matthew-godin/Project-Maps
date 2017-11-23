@@ -98,8 +98,8 @@ void firstGpsFix()
 {
   if (firstFix)
   {
-    cPos.x = 0;
-    cPos.y = 0;
+    displacementGPS.x = 0;
+    displacementGPS.y = 0;
     firstFix = false;
     GpsPosition.x = GPS.latitude / 100.0;
     GpsPosition.y = GPS.longitude / 100.0;
@@ -127,7 +127,7 @@ void printGpsFixInformation()
   tft.println(GPS.altitude);
   tft.print("Satellites: ");
   tft.println((int)GPS.satellites);*/
-  cPos.x = (GPS.latitude / 100.0 - GpsPosition.x) * 111000;
-  cPos.y = (GPS.longitude / 100.0 - GpsPosition.y) * 111000;
+  displacementGPS.x = (GPS.latitude / 100.0 - GpsPosition.x) * 111000;
+  displacementGPS.y = (GPS.longitude / 100.0 - GpsPosition.y) * 111000;
 }
 

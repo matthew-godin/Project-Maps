@@ -3,12 +3,11 @@
 * This is Project Maps Source Code! *
 *************************************
 
-Please read this code carefully and
-use it as you wish on your Arduino
-Mega 2560 with Adafruit Ultimate GPS,
+This project uses Arduino Mega 
+2560 with Adafruit Ultimate GPS,
 HCSR04 sensors, tft touch screen,
 MPU6050 accelerometer and SD card
-reader. This is not a release version.
+reader. This is the final version.
  */
 #include "projectMaps.h"
 
@@ -22,7 +21,7 @@ TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 bool buttonPressed;
 ButtonState buttonState;
 int w, h;
-Position cPos;
+Position displacementGPS;
 Sd2Card card;
 SdVolume volume;
 SdFile root;
@@ -39,13 +38,11 @@ void setup()
   startPopUpScreen();
   setInitialFontAndColor();
   gpsSetup();
-  //sdCardSetup();
   buttonDrawLoops();
 }
 
 void loop()
 {
-  //loopInit();
   gpsLoops();
   sensorLoops();
   buttonDrawLoops();
